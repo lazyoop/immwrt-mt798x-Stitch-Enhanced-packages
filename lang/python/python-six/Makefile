@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2015, 2017-2018 OpenWrt.org
+# dev 2024 <dev@idea.lan>
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -38,6 +39,17 @@ writing Python code that is compatible on both Python versions.  See the
 documentation for more information on what is provided.
 endef
 
+define Build/Compile
+	$(call Build/Compile/PyMod,,install --prefix=/usr --root=$(PKG_INSTALL_DIR))
+endef
+
+define Host/Compile
+	$(call Build/Compile/HostPyMod,,install --prefix="" --root="$(STAGING_DIR_HOSTPKG)")
+endef
+
+Host/Install:=
+
+$(eval $(call HostBuild))
 $(eval $(call Py3Package,python3-six))
 $(eval $(call BuildPackage,python3-six))
 $(eval $(call BuildPackage,python3-six-src))
