@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=OpenBLAS
-PKG_VERSION:=0.3.18
+PKG_VERSION:=0.3.21
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=OpenBLAS-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/xianyi/OpenBLAS/releases/download/v$(PKG_VERSION)/
-PKG_HASH:=1632c1e8cca62d8bed064b37747e331a1796fc46f688626337362bf0d16aeadb
+PKG_HASH:=f36ba3d7a60e7c8bcc54cd9aaa9b1223dd42eaf02c811791c37e8ca707c241ca
 PKG_LICENSE:=BSD 3-Clause
 PKG_MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
 
@@ -63,6 +63,8 @@ else ifeq ($(ARCH),mipsel)
   OPENBLAS_TARGET:=MIPS24K
 else ifeq ($(ARCH),powerpc)
   OPENBLAS_TARGET:=PPC440
+else ifeq ($(ARCH),riscv64)
+  OPENBLAS_TARGET:=RISCV64_GENERIC
 endif
 endif # ifeq ($(OPENBLAS_TARGET),)
 
