@@ -20,9 +20,9 @@ PKG_LICENSE_FILES:=LICENSE-APACHE LICENSE-MIT
 HOST_BUILD_DEPENDS:=python3/host
 PKG_HOST_ONLY:=1
 
-include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
-include ./rust-values.mk
+include $(INCLUDE_DIR)/host-build.mk
+include ./rust-host.mk
 
 define Package/rust
   SECTION:=lang
@@ -30,7 +30,8 @@ define Package/rust
   SUBMENU:=Rust
   TITLE:=Rust Programming Language Compiler
   URL:=https://www.rust-lang.org/
-  DEPENDS:=$(RUST_ARCH_DEPENDS)
+  DEPENDS:=$(RUST_ARCH_DEPENDS) \
+    +pkg-config +libunwind +libopenssl +liblzma +libc
 endef
 
 define Package/rust/description
@@ -48,8 +49,8 @@ TARGET_CONFIGURE_ARGS = \
 	--set=target.$(RUSTC_TARGET_ARCH).cc=$(TARGET_CC_NOCACHE) \
 	--set=target.$(RUSTC_TARGET_ARCH).cxx=$(TARGET_CXX_NOCACHE) \
 	--set=target.$(RUSTC_TARGET_ARCH).linker=$(TARGET_CC_NOCACHE) \
-	--set=target.$(RUSTC_TARGET_ARCH).ranlib=$(TARGET_RANLIB) \
-	$(if $(CONFIG_USE_MUSL),--set=target.$(RUSTC_TARGET_ARCH).musl-root=$(TOOLCHAIN_DIR))
+	--set=target.$(RUSTC_TARGET_ARCH).musl-root=$(TOOLCHAIN_DIR) \
+	--set=target.$(RUSTC_TARGET_ARCH).ranlib=$(TARGET_RANLIB)
 
 # CARGO_HOME is an environmental
 HOST_CONFIGURE_OPTS += CARGO_HOME="$(CARGO_HOME)"
@@ -66,11 +67,13 @@ HOST_CONFIGURE_ARGS = \
 	--datadir=$(CARGO_HOME)/share \
 	--mandir=$(CARGO_HOME)/man \
 	--dist-compression-formats=xz \
+	--enable-llvm-link-shared \
+	--enable-llvm-plugins \
 	--enable-missing-tools \
+	--enable-ninja \
 	--disable-sanitizers \
 	--release-channel=stable \
 	--enable-cargo-native-static \
-	--set=llvm.download-ci-llvm=true \
 	$(TARGET_CONFIGURE_ARGS)
 
 define Host/Uninstall
@@ -98,6 +101,10 @@ define Host/Install
 		    -e 's|@RUSTC_LDFLAGS@|$(RUSTC_LDFLAGS)|g' \
 			$(CURDIR)/files/cargo-config > $(CARGO_HOME)/config ; \
 	)
+endef
+
+define Package/rust/config
+	source "$(SOURCE)/Config.in"
 endef
 
 $(eval $(call HostBuild))
