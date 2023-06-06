@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=asgiref
-PKG_VERSION:=3.3.1
+PKG_NAME:=python-asgiref
+PKG_VERSION:=3.7.2
 PKG_RELEASE:=1
 
 PYPI_NAME:=asgiref
-PKG_HASH:=7162a3cb30ab0609f1a4c95938fd73e8604f63bdba516a7f7d64b83ff09478f0
+PKG_HASH:=9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed
 
 PKG_MAINTAINER:=Peter Stadler <peter.stadler@student.uibk.ac.at>
 PKG_LICENSE:=BSD-3-Clause
@@ -19,8 +19,8 @@ define Package/python3-asgiref
   SUBMENU:=Python
   SECTION:=lang
   CATEGORY:=Languages
-  TITLE:=Standard for Python asynchronous web apps and servers.
-  URL:=https://asgi.readthedocs.io/en/latest/
+  TITLE:=ASGI specs, helper code, and adapters
+  URL:=https://github.com/django/asgiref/
   DEPENDS:=+python3-light +python3-logging +python3-asyncio
 endef
 
