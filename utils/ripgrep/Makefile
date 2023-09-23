@@ -17,6 +17,7 @@ PKG_LICENSE:=MIT Unlicense
 PKG_LICENSE_FILES:=LICENSE-MIT UNLICENSE
 
 PKG_BUILD_DEPENDS:=rust/host
+PKG_BUILD_PARALLEL:=1
 
 include ../../lang/rust/rust-package.mk
 include $(INCLUDE_DIR)/package.mk
