@@ -99,21 +99,11 @@ config LIBCURL_TELNET
 
 config LIBCURL_TFTP
 	bool "TFTP protocol"
-	default y
+	default n
 
 config LIBCURL_NGHTTP2
 	bool "HTTP2 protocol"
 	default y
-
-config LIBCURL_NGHTTP3
-	bool "HTTP/3 protocol"
-	depends on LIBCURL_OPENSSL
-	default n
-
-config LIBCURL_NGTCP2
-	bool "QUIC protocol"
-	depends on LIBCURL_OPENSSL
-	default n
 
 comment "Miscellaneous"
 
@@ -123,11 +113,11 @@ config LIBCURL_PROXY
 
 config LIBCURL_CRYPTO_AUTH
 	bool "Enable cryptographic authentication"
-	default y
+	default n
 
 config LIBCURL_TLS_SRP
 	bool "Enable TLS-SRP authentication"
-	default y
+	default n
 
 config LIBCURL_LIBIDN2
 	bool "Enable IDN2 support"
@@ -135,7 +125,7 @@ config LIBCURL_LIBIDN2
 
 config LIBCURL_THREADED_RESOLVER
 	bool "Enable threaded DNS resolver"
-	default y
+	default n
 	help
 		Enable POSIX threaded asynchronous DNS resolution
 
@@ -144,8 +134,8 @@ config LIBCURL_ZLIB
 	default n
 
 config LIBCURL_ZSTD
-       bool "Enable zstd support"
-       default n
+	bool "Enable zstd support"
+	default n
 
 config LIBCURL_UNIX_SOCKETS
 	bool "Enable unix domain socket support"
