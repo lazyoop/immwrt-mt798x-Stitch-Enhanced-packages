@@ -99,7 +99,7 @@ config LIBCURL_TELNET
 
 config LIBCURL_TFTP
 	bool "TFTP protocol"
-	default n
+	default y
 
 config LIBCURL_NGHTTP2
 	bool "HTTP2 protocol"
