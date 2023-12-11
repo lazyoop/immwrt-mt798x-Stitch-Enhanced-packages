@@ -7,15 +7,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-bleak
-PKG_VERSION:=0.20.1
+PKG_VERSION:=0.21.1
 PKG_RELEASE:=1
 
 PYPI_NAME:=bleak
-PKG_HASH:=db599f5f100e252e9cdd4020c8657daca0371a3c697e87432abc702f3774cb4c
+PKG_HASH:=ec4a1a2772fb315b992cbaa1153070c7e26968a52b0e2727035f443a1af5c18f
 
 PKG_MAINTAINER:=Quintin Hill <stuff@quintin.me.uk>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
+
+PKG_BUILD_DEPENDS:=python-poetry-core/host
 
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
