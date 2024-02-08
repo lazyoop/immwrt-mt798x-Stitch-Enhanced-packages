@@ -4,37 +4,37 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NPM_NAME:=level
+PKG_NPM_NAME:=homebridge-tuya-platform
 PKG_NAME:=node-$(PKG_NPM_NAME)
-PKG_VERSION:=8.0.1
+PKG_VERSION:=1.5.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NPM_NAME)-$(PKG_VERSION).tgz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/npm/$(PKG_NPM_NAME)/-/ \
                 https://registry.npmjs.org/$(PKG_NPM_NAME)/-/
-PKG_HASH:=3f5e0522ccaa3b2bd125cd48ed18d307b0d011d65f210d26e10faff3300391f4
+PKG_HASH:=f4f7a9f403c5a76cd6f41ead8043332926b6891bf395f1cb51db178a88983f31
 
 PKG_MAINTAINER:=Hirokazu MORIKAWA <morikw2@gmail.com>
 PKG_LICENSE:=MIT
-PKG_LICENSE_FILES:=LICENSE.md
+PKG_LICENSE_FILES:=LICENSE
 
 PKG_BUILD_DEPENDS:=node/host
 PKG_BUILD_PARALLEL:=1
-PKG_USE_MIPS16:=0
+PKG_BUILD_FLAGS:=no-mips16
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/node-level
+define Package/node-homebridge-tuya-platform
   SUBMENU:=Node.js
   SECTION:=lang
   CATEGORY:=Languages
-  TITLE:=Fast & simple storage - a Node.js-style LevelDB wrapper
-  URL:=https://www.npmjs.org/package/level
-  DEPENDS:=+node +node-classic-level
+  TITLE:=Official Homebridge plugin for Tuya Open API
+  URL:=https://www.npmjs.com/package/homebridge-tuya-platform
+  DEPENDS:=+node +node-homebridge
 endef
 
-define Package/node-level/description
- Fast & simple storage - a Node.js-style LevelDB wrapper (a convenience package bundling LevelUP & LevelDOWN)
+define Package/node-homebridge-tuya-platform/description
+ Official Homebridge plugin for Tuya Open API, maintained by the Tuya Developer Team.
 endef
 
 TAR_OPTIONS+= --strip-components 1
@@ -53,26 +53,28 @@ define Build/Compile
 	$(MAKE_FLAGS) \
 	npm_config_nodedir=$(STAGING_DIR)/usr/ \
 	$(if $(CONFIG_NODEJS_NPM_KEEP_CACHE), npm_config_cache=$(NPM_CACHE_DIR)/npm-cache-$(PKG_NPM_NAME),npm_config_cache=$(TMP_DIR)/npm-cache-$(TMPNPM)) \
-	npm install --prefer-offline --no-audit --global-style --install-strategy=shallow --no-save --omit=dev --no-package-lock
+	npm install --prefer-offline --no-audit --global-style --install-strategy=shallow --no-save --omit=dev --no-package-lock --ignore-scripts
 	rm -rf $(TMP_DIR)/npm-cache-$(TMPNPM)
 	rm -f $(PKG_BUILD_DIR)/node_modules/.package-lock.json
 	find $(PKG_BUILD_DIR)/node_modules -type d -empty -print0 | xargs -0 rmdir || true
 endef
 
-define Package/node-level/install
+define Package/node-homebridge-tuya-platform/install
 	$(INSTALL_DIR) $(1)/usr/lib/node/$(PKG_NPM_NAME)
-	$(CP) $(PKG_BUILD_DIR)/{package.json,*.md,*.js} \
+	$(CP) $(PKG_BUILD_DIR)/{package.json,LICENSE} \
 		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
-	$(CP) $(PKG_BUILD_DIR)/node_modules \
+	$(CP) $(PKG_BUILD_DIR)/{*.md,*.js,config.schema.json} \
+		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
+	$(CP) $(PKG_BUILD_DIR)/{node_modules,config,lib,util} \
 		$(1)/usr/lib/node/$(PKG_NPM_NAME)/
 	$(INSTALL_DIR) $(1)/usr/lib/node_modules
 	$(LN) ../node/$(PKG_NPM_NAME) $(1)/usr/lib/node_modules/$(PKG_NPM_NAME)
 endef
 
-define Package/node-level/postrm
+define Package/node-homebridge-tuya-platform/postrm
 #!/bin/sh
-rm /usr/lib/node_modules/level || true
-rm -rf /usr/lib/node/level || true
+rm /usr/lib/node_modules/homebridge-tuya-platform || true
+rm -rf /usr/lib/node/homebridge-tuya-platform || true
 endef
 
-$(eval $(call BuildPackage,node-level))
+$(eval $(call BuildPackage,node-homebridge-tuya-platform))
