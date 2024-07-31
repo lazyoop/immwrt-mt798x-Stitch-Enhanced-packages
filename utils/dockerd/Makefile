@@ -46,7 +46,6 @@ define Package/dockerd
     +kmod-nf-ipvs \
     +kmod-veth \
     +tini \
-    +uci-firewall \
     @!(mips||mips64||mipsel)
   USERID:=docker:docker
   MENU:=1
