@@ -24,7 +24,6 @@ PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
-include $(INCLUDE_DIR)/host-build.mk
 
 define Package/libyaml
   SUBMENU:=Languages
@@ -35,8 +34,6 @@ define Package/libyaml
 endef
 
 TARGET_CFLAGS += $(FPIC)
-
-HOST_CONFIGURE_ARGS += --disable-shared
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
@@ -53,4 +50,3 @@ define Package/libyaml/install
 endef
 
 $(eval $(call BuildPackage,libyaml))
-$(eval $(call HostBuild))

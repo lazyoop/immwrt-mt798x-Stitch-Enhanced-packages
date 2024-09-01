@@ -8,17 +8,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-pytest-xdist
-PKG_VERSION:=2.2.1
-PKG_RELEASE:=2
+PKG_VERSION:=2.2.0
+PKG_RELEASE:=1
 
 PYPI_NAME:=pytest-xdist
-PKG_HASH:=718887296892f92683f6a51f25a3ae584993b06f7076ce1e1fd482e59a8220a2
+PKG_HASH:=1d8edbb1a45e8e1f8e44b1260583107fc23f8bc8da6d18cb331ff61d41258ecf
 
-PKG_MAINTAINER:=Jan Pavlinec <jan.pavlinec1@gmail.com>
+PKG_MAINTAINER:=Jan Pavlinec <jan.pavlinec@nic.cz>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
-PKG_BUILD_DEPENDS:=python-setuptools-scm/host
+HOST_PYTHON3_PACKAGE_BUILD_DEPENDS:=setuptools-scm
 
 include ../pypi.mk
 include $(INCLUDE_DIR)/package.mk
