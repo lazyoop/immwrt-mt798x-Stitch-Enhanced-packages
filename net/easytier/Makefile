@@ -47,7 +47,7 @@ else
   PKG_SOURCE_DIR_NAME:=dummy
 endif
 
-PKG_MAINTAINER:=dev <dev@idean.lan>
+PKG_MAINTAINER:=dev <dev@idea.lan>
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 
@@ -68,9 +68,13 @@ define Package/easytier/description
   A simple, decentralized mesh VPN with WireGuard support.
 endef
 
+define Build/Compile
+endef
+
 define Package/easytier/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_SOURCE_DIR_NAME)/easytier-core $(1)/usr/bin/easytier-core
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(PKG_SOURCE_DIR_NAME)/easytier-cli $(1)/usr/bin/easytier-cli
 endef
 
 $(eval $(call BuildPackage,easytier))
