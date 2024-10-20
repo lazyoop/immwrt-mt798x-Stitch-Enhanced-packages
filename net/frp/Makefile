@@ -54,7 +54,7 @@ define Package/frp/template
   endef
 
   define Package/$(1)/conffiles
-/etc/config/$(1)
+    /etc/config/$(1)
   endef
 
   define Package/$(1)/install
