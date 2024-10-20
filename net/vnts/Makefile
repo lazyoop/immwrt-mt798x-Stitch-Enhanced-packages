@@ -57,16 +57,16 @@ define Package/vnt-server
   DEPENDS:=@(aarch64||arm||mips||mipsel||x86_64) @!(TARGET_x86_geode||TARGET_x86_legacy) +kmod-tun
 endef
 
-define Package/vnt-client/description
+define Package/vnt-server/description
   An efficient VPN. Simple and efficient remote networking and intranet penetration tool.
 endef
 
 define Build/Compile
 endef
 
-define Package/vnt-client/install
+define Package/vnt-server/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/vnts $(1)/usr/bin/vnts
 endef
 
-$(eval $(call BuildPackage,vnt-client))
+$(eval $(call BuildPackage,vnt-server))
