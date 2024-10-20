@@ -58,7 +58,7 @@ UNZIP_CMD:=unzip -q -d $(PKG_BUILD_DIR) $(DL_DIR)/$(PKG_SOURCE)
 define Package/easytier
   SECTION:=net
   CATEGORY:=Network
-  SUBMENU:=Web Servers/Proxies
+  SUBMENU:=VPN
   TITLE:=EasyTier networking
   URL:=https://github.com/EasyTier/EasyTier/
   DEPENDS:=@(aarch64||arm||mips||mipsel||x86_64) @!(TARGET_x86_geode||TARGET_x86_legacy) +kmod-tun
