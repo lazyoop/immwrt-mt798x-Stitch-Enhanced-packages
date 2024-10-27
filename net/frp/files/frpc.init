@@ -6,6 +6,31 @@ USE_PROCD=1
 NAME=frpc
 PROG=/usr/bin/$NAME
 
+make_dir() {
+	local d
+	for d in "$@"; do
+		if [ ! -d "$d" ]; then
+			mkdir -p "$d" 2>/dev/null || return 1
+		fi
+	done
+
+	return 0
+}
+
+log_dir() {
+	config_get log_file "common" "log_file" ""
+	log_file="${log_file:-"/var/log/frpc.log"}"
+	
+	local log_dir
+	log_dir="$(dirname "${log_file}")"
+
+	[ -s ${log_file} ] || {
+		[ -d "$log_dir" ] || {
+			make_dir "$log_dir" || return 1
+		}
+	}
+}
+
 _err() {
 	echo "$*" >&2
 	logger -p daemon.err -t "$NAME" "$*"
@@ -18,10 +43,12 @@ config_cb() {
 	local name="$2"
 	if [ "$type" = "conf" ]; then
 		echo "[$name]" >> "$conf_file"
+		#sed -i "1d" "$conf_file"
 		option_cb() {
 			local option="$1"
 			local value="$2"
-			[ "$option" = "name" ] && \
+			#[ "$option" = "name" ] && \#
+			[ "$option" = "$name" ] && \
 			sed -i "s/$CONFIG_SECTION/$value/g" "$conf_file" || \
 			echo "$option = $value" >> "$conf_file";
 		}
@@ -44,10 +71,16 @@ service_triggers()
 
 start_service() {
 	local init_cfg=" "
-	local conf_file="/var/etc/$NAME.ini"
+	local conf_file="/var/etc/$NAME.toml"
 
 	> "$conf_file"
 	config_load "$NAME"
+
+	log_dir
+
+	local enabled
+		config_get_bool enabled "common" 'enabled' '0'
+		[ "$enabled" = "1" ] || return 1
 
 	local stdout stderr user group respawn env conf_inc
 	uci_validate_section "$NAME" init "$init_cfg" \
@@ -78,3 +111,4 @@ start_service() {
 	[ -n "$env" ] && config_list_foreach "$init_cfg" env "procd_append_param env"
 	procd_close_instance
 }
+
