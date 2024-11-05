@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2022 Krypton Lee <jun.k.lee199410@outlook.com>
+# 2024 dev <dev@idea.lan>
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -8,8 +9,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qt6tools
-PKG_BASE:=6.5
-PKG_BUGFIX:=3
+PKG_BASE:=6.8
+PKG_BUGFIX:=0
 PKG_VERSION:=$(PKG_BASE).$(PKG_BUGFIX)
 PKG_RELEASE:=1
 
@@ -17,7 +18,8 @@ PKG_SOURCE:=qttools-everywhere-src-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/qt/archive/qt/$(PKG_BASE)/$(PKG_VERSION)/submodules/ \
 		  https://mirrors.aliyun.com/qt/archive/qt/$(PKG_BASE)/$(PKG_VERSION)/submodules/ \
 		  http://download.qt-project.org/archive/qt/$(PKG_BASE)/$(PKG_VERSION)/submodules/
-PKG_HASH:=fc91d32b3f696725bbb48b0df240c25b606bbee3bd22627cfcbee876a6405e37
+PKG_HASH:=403115d8268503c6cc6e43310c8ae28eb9e605072a5d04e4a2de8b6af39981f7
+
 HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/qttools-everywhere-src-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Krypton Lee <jun.k.lee199410@outlook.com>
