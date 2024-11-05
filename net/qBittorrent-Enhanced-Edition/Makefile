@@ -27,7 +27,7 @@ define Package/qbittorrent-enhanced-edition
   URL:=https://github.com/c0re100/qBittorrent-Enhanced-Edition
   DEPENDS:=+libtorrent-rasterbar +libQt6Core +libQt6Network +libQt6Sql \
     +libQt6Xml +qt6-plugin-libqopensslbackend +qt6-plugin-libqsqlite
-  PROVIDES:=qbittorrent
+  PROVIDES:=qbittorrent-enhanced
 endef
 
 define Package/qbittorrent-enhanced-edition/description
@@ -44,10 +44,12 @@ define Package/qbittorrent-enhanced-edition/conffiles
 endef
 
 CMAKE_OPTIONS+= \
+	-DCMAKE_BUILD_TYPE=Release \
 	-DGUI=OFF \
 	-DQT6=ON \
 	-DSTACKTRACE=OFF \
 	-DWEBUI=ON \
+	-DVERBOSE_CONFIGURE=ON \
 	-DQT_ADDITIONAL_PACKAGES_PREFIX_PATH=$(STAGING_DIR_HOSTPKG)
 
 define Package/qbittorrent-enhanced-edition/install
