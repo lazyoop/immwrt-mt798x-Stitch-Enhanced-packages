@@ -11,7 +11,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-release-$(PKG_VERSION)
 
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=COPYING
-PKG_CPE_ID:=cpe:/a:qbittorrent:qbittorrent
+PKG_CPE_ID:=cpe:/a:qbittorrent-enhanced:qbittorrent-enhanced
 
 PKG_BUILD_DEPENDS:=qt6tools/host
 PKG_BUILD_PARALLEL:=1
