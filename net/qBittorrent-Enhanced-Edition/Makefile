@@ -20,9 +20,9 @@ include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/qbittorrent-enhanced-edition
-  SUBMENU:=BitTorrent
   SECTION:=net
   CATEGORY:=Network
+  SUBMENU:=BitTorrent
   TITLE:=bittorrent client programmed in C++ / Qt
   URL:=https://github.com/c0re100/qBittorrent-Enhanced-Edition
   DEPENDS:=+libtorrent-rasterbar +libQt6Core +libQt6Network +libQt6Sql \
