@@ -38,6 +38,7 @@ NODEJS_BIN_SUM:=24a5d58a1d4c2903478f4b7c3cfd2eeb5cea2cae3baee11a4dc6a1fed25fec6c
 NODE_MODULE_VERSION:=115
 endif
 endif
+endif
 
 PKG_SOURCE:=$(PKG_NAME)-v$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://mirrors.tencent.com/nodejs-release/v$(PKG_VERSION) \
