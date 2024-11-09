@@ -19,7 +19,10 @@ PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Jeffery To <jeffery.to@gmail.com>
 
+HOST_BUILD_DEPENDS:=python3/host
+
 include ../pypi.mk
+include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 include ../python3-package.mk
 
@@ -48,8 +51,8 @@ define Host/Compile
 endef
 
 Host/Install:=
-
 $(eval $(call HostBuild))
+
 $(eval $(call Py3Package,python3-six))
 $(eval $(call BuildPackage,python3-six))
 $(eval $(call BuildPackage,python3-six-src))
