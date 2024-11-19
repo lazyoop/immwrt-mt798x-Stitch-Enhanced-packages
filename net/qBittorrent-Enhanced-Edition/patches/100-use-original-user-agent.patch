@@ -1,16 +1,13 @@
---- a/src/base/version.h.in
-+++ b/src/base/version.h.in
-@@ -30,7 +30,7 @@
-
- #define QBT_VERSION_MAJOR 5
- #define QBT_VERSION_MINOR 0
--#define QBT_VERSION_BUGFIX 0
-+#define QBT_VERSION_BUGFIX 8
- #define QBT_VERSION_BUILD 10
- #define QBT_VERSION_STATUS ""  // Should be empty for stable releases!
-
---- a/src/base/bittorrent/sessionimpl.cpp
-+++ b/src/base/bittorrent/sessionimpl.cpp
+Subject: [PATCH] refresh
+---
+Index: src/base/bittorrent/sessionimpl.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/base/bittorrent/sessionimpl.cpp b/src/base/bittorrent/sessionimpl.cpp
+--- a/src/base/bittorrent/sessionimpl.cpp	(revision 733303569712db10fd349c5f5c8af90bf9f23b8e)
++++ b/src/base/bittorrent/sessionimpl.cpp	(date 1732004958236)
 @@ -121,7 +121,7 @@
  namespace
  {
